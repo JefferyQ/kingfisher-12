@@ -93,25 +93,26 @@ define([
               });
 
 
-            // groupEnter.append('text')
-            //   .attr("class", "countryName")
-            //   .attr('transform', function(d) {
-            //     debugger;
-            //     var bbox = d3.select(this.parentNode).select('path').node().getBBBox
-            //     var x = bbox.x + bbox.width/2;
-            //     var y = bbox.y + bbox.height/2;
-            //     return "translate(" + x +',' + y + ')';
-            //   })
-            //   .text(function(d) {
-            //     var country = d.properties.name;
+            groupEnter.append('text')
+              .attr("class", "countryName")
+              .attr('transform', function(d) {
+                debugger;
+                var bbox = d3.select(this.parentNode).select('path').node().getBBox();
+                var x = bbox.x + bbox.width/2;
+                var y = bbox.y + bbox.height/2;
+                return "translate(" + x +',' + y + ')';
+              })
+              .text(function(d) {
+                var country = d.properties.name;
 
-            //     var model = that.collection.findWhere({name : country})
-            //     if (model) {
-            //       return model.get('name');
-            //     } else {
-            //       return ""
-            //     }
-            //   })
+                var model = that.collection.findWhere({name : country})
+                if (model) {
+                  return model.get('name');
+                } else {
+                  return ""
+                }
+              })
+              .attr("text-anchor", "middle")
 
            
 
