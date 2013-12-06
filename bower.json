@@ -10,7 +10,7 @@
     "requirejs-text": "~2.0.5",
     "modernizr": "~2.6.2",
     "d3": "~3.3.11",
-    "topojson": "~1.4.5"
+    "highcharts" : "latest"
   },
   "devDependencies": {}
 }
