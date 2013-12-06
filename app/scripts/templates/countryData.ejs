@@ -1,0 +1,49 @@
+<h1 class="name"><%= country.name %></h1>
+<hr/>
+<div class="chart"></div>
+<hr/>
+<table>
+  <tr>
+    <th rowspan="2">Date</th>
+    <th colspan="3">Volume</th>
+    <th colspan="3">Value</th>
+  </tr>
+  <tr>
+    <th>Forecast</th>
+    <th>Actual</th>
+    <th>Variance</th>
+    <th>Forecast</th>
+    <th>Actual</th>
+    <th>Variance</th>
+  </tr>
+<% for(var i=0; i<country.data.length; i++) {%>
+   <% var dp = country.data[i] %>
+   <tr>
+    <td>
+      <%= dp['date'] %>
+    </td>
+    <td>
+      <%= dp['vol_f'] %>
+    </td>
+    <td>
+      <%= dp['vol'] %>
+    </td>
+    <td>
+      <%= dp['vol_v'] %>
+    </td>
+    <td>
+      <%= dp['val_f'] %>
+    </td>
+    <td>
+      <%= dp['val'] %>
+    </td>
+    <td>
+      <%= dp['val_v'] %>
+    </td>
+   </tr>
+<% } %>
+
+</table>
+
+
+</div>
