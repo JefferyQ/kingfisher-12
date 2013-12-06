@@ -47,27 +47,35 @@ define([
           var svg = d3.select('#mapContainer').select('svg');
           var projection = d3.geo.mercator()
             .scale(600)
-            .translate([this.width/3, this.height*1.5]);
+            .translate([this.width/3, this.height*1.2]);
 
           var that = this;
 
           // load the json data
           d3.json('/countries.geo.json', function(error, data) {
 
-            var countries = svg.selectAll('path')
+            var countries = svg.selectAll('g')
             .data(data.features);
 
-            countries.enter().append('path')
-              .attr("class", "country")
+
+
+            var groupEnter = countries.enter().append('g')
+              .attr("class", "countryGroup")
               .attr("id", function(d) {
                 return d.properties.name;
               });
 
-            countries
+
+
+
+            groupEnter.append('path')
+              .attr("class", "country")
+              .attr("id", function(d) {
+                return d.properties.name;
+              })
               .attr("d", d3.geo.path().projection(projection))
               .attr("class", function(d) {
                 var country = d.properties.name;
-
                 var model = that.collection.findWhere({name : country})
                 if (model) {
                   return "country " + model.getValStatus('2013-04-01');
@@ -75,15 +83,6 @@ define([
                   return "country notused"
                 }
               })
-              // .on('mouseover', function(d) {
-              //   var country = d.properties.name;
-
-              //   var model = that.collection.findWhere({name : country})
-              //   if (model) {
-              //     that.dataView.model = model;
-              //     that.dataView.render();
-              //   } 
-              // })
               .on('click', function(d) {
                 var country = d.properties.name;
                 var model = that.collection.findWhere({name : country})
@@ -91,7 +90,30 @@ define([
                   that.dataView.model = model;
                   that.dataView.render();
                 } 
-              })
+              });
+
+
+            // groupEnter.append('text')
+            //   .attr("class", "countryName")
+            //   .attr('transform', function(d) {
+            //     debugger;
+            //     var bbox = d3.select(this.parentNode).select('path').node().getBBBox
+            //     var x = bbox.x + bbox.width/2;
+            //     var y = bbox.y + bbox.height/2;
+            //     return "translate(" + x +',' + y + ')';
+            //   })
+            //   .text(function(d) {
+            //     var country = d.properties.name;
+
+            //     var model = that.collection.findWhere({name : country})
+            //     if (model) {
+            //       return model.get('name');
+            //     } else {
+            //       return ""
+            //     }
+            //   })
+
+           
 
           });
 

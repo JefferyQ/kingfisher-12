@@ -22,9 +22,6 @@ require.config({
         },
         d3: {
             exports: 'd3'
-        },
-        topojson: {
-            exports: 'topojson'
         }
     },
     paths: {
@@ -33,8 +30,7 @@ require.config({
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
         bootstrap: 'vendor/bootstrap',
-        highcharts: '../bower_components/highcharts/highcharts',
-        topojson: '../bower_components/topojson/topojson'
+        highcharts: '../bower_components/highcharts/highcharts'
     }
 });
 
@@ -46,6 +42,8 @@ require([
     Backbone.on('gotoCountry', function(countryName) {
       router.navigate('country/' + countryName, {trigger: true});
     });
-
-    Backbone.history.start();
+    Backbone.on('loadedData', function() {
+        console.log('loadedData');
+        Backbone.history.start();
+    })
 });
